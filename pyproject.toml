@@ -3,16 +3,18 @@ name = "hexlet-code"
 version = "0.1.0"
 description = ""
 authors = ["vlad moryakov <sat1sfy@vk.com>"]
-packages = [{include = "gendiff"}]
+packages = [{include = "gen_diff"}]
 
 [tool.poetry.dependencies]
 python = "^3.8"
 pytest = "^7.1.2"
+flake8 = "^4.0.1"
+pytest-cov = "^3.0.0"
 
 [tool.poetry.dev-dependencies]
 
 [tool.poetry.scripts]
-gendiff = "gendiff.scripts.gendiff:main"
+gendiff = "gen_diff.scripts.gendiff:main"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
