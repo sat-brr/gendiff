@@ -36,11 +36,11 @@ def to_stylish(source, level=0):
         value = values[0]
         if flag == 'common':
             result += f'{indent}  {key}: {get_value(value, indent)}\n'
-        if flag == 'add':
+        if flag == 'added':
             result += f'{indent}+ {key}: {get_value(value, indent)}\n'
-        if flag == 'remove':
+        if flag == 'removed':
             result += f'{indent}- {key}: {get_value(value, indent)}\n'
-        if flag == 'change':
+        if flag == 'updated':
             old, new = value[0], value[1]
             result += f'{indent}- {key}: {get_value(old, indent)}\n'
             result += f'{indent}+ {key}: {get_value(new, indent)}\n'
