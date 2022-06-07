@@ -1,21 +1,35 @@
 import pytest
-import sys
-sys.path.append('/home/sat/python-project-lvl2')
-from gen_diff import generate_d
+import json
+import yaml
+import os
+from gen_diff.engine import generate_diff
 
 
-A = "{\n- follow: false\n  host: hexlet.io\n- proxy: 123.234.53.22\n- timeout: 50\n+ timeout: 20\n+ verbose: true\n}"
+PATH = './tests/fixtures/'
+RESULT = os.path.join(PATH, 'complete_pylish')
+TEMP_JSON = os.path.join(PATH, 'temp_json.txt')
+TEMP_YAML = os.path.join(PATH, 'temp_yaml.txt')
 
 
-def result_open():
-    with open('/home/sat/python-project-lvl2/tests/fixtures/result1') as fi:
-        intro = fi.read()
-        return intro
-
-def test_generate_diff():   
-    assert generate_d.generate_diff('file1.json', 'file2.json') == result_open()
+file1_json, file2_json = (os.path.join(PATH, 'file5.json'), 
+             os.path.join(PATH, 'file6.json'))
+file1_yaml, file2_yaml = (os.path.join(PATH, 'file5.yaml'), 
+             os.path.join(PATH, 'file6.yaml'))
 
 
-
-print(result_open())
-
+def test_generate_diff():
+    with open(RESULT) as file:
+        result = file.read()
+    with open(TEMP_JSON, 'w') as t_j:
+        gd_j = generate_diff(file1_json, file2_json)
+        t_j.write(gd_j)
+    with open(TEMP_YAML, 'w') as t_y:
+        gd_y = generate_diff(file1_yaml,file2_yaml)
+        t_y.write(gd_y)
+    j = open(TEMP_JSON, 'r')
+    s_j = j.read()
+    y = open(TEMP_YAML, 'r')
+    s_y = y.read()
+    assert s_j == result
+    assert s_y == result
+    

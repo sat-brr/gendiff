@@ -3,7 +3,7 @@ install: # установка зависимостей
 build: # сборка пакета
 	poetry build
 package-install: # установка пакета из дистрибутива
-	python3 -m pip install --user dist/*.whl
+	python3 -m pip install dist/*.whl
 package-uninstall: # удаление пакета
 	python3 -m pip uninstall dist/*.whl
 lint:

@@ -1,17 +1,11 @@
 #!/usr/bin/env python3
-import argparse
-import sys
-sys.path.append('/home/sat/python-project-lvl2')
-from gen_diff.generate_d import generate_diff
+from gen_diff.engine import generate_diff
+from gen_diff.parser import parsing
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Compares two configuration files and shows a difference.')
-    parser.add_argument('first_file')
-    parser.add_argument('second_file')
-    parser.add_argument('-f', '--format', help='set format of output')
-    args = parser.parse_args()
-    print(generate_diff(args.first_file, args.second_file))
+    first, second, format = parsing()
+    print(generate_diff(first, second, format))
 
 
 if __name__ == '__main__':
