@@ -67,7 +67,3 @@ def test_generate_diff_json():
     s_y = y.read()
     assert s_j == result
     assert s_y == result
-
-    
-    
-test_generate_diff_json()
