@@ -28,7 +28,7 @@ jobs:
           poetry run pytest
       - uses: paambaati/codeclimate-action@v3.0.0
         env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          CC_TEST_REPORTER_ID: 9b605d7008a430e88024d48fe201bd3c22f30bd80ea3b428e4533e1808538245
         with:
-          coverageCommand: poetry run pytest --cov=gendiff --cov-report xml
+          coverageCommand: poetry run pytest --cov=gen_diff --cov-report xml
           debug: true
