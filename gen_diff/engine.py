@@ -3,6 +3,7 @@ import os
 import yaml
 from gen_diff.formatter.f_stylish import to_stylish
 from gen_diff.formatter.plain import to_plain
+from gen_diff.formatter.f_json import to_json
 
 
 UPDATE, ADD, REMOVE = 'updated', 'added', 'removed'
@@ -49,3 +50,5 @@ def generate_diff(path1, path2, format='stylish'):
         return to_stylish(diff)
     elif format == 'plain':
         return to_plain(diff)
+    elif format == 'json':
+        return to_json(diff)
