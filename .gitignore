@@ -8,3 +8,4 @@ coverage.xml
 .vim
 bin
 env/
+dist
