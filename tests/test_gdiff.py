@@ -1,4 +1,3 @@
-from re import A
 import pytest
 import os
 from gendiff.generate_diff import generate_diff
@@ -11,15 +10,15 @@ RESULT_JSON = os.path.join(PATH, 'complete_json.txt')
 TEMP = os.path.join(PATH, 'temp.txt')
 
 
-file1_json, file2_json = (os.path.join(PATH, 'file5.json'), 
-             os.path.join(PATH, 'file6.json'))
-file1_yaml, file2_yaml = (os.path.join(PATH, 'file5.yaml'), 
-             os.path.join(PATH, 'file6.yaml'))
+file1_json, file2_json = (os.path.join(PATH, 'file5.json'),
+                          os.path.join(PATH, 'file6.json'))
+file1_yaml, file2_yaml = (os.path.join(PATH, 'file5.yaml'),
+                          os.path.join(PATH, 'file6.yaml'))
 
 
 @pytest.mark.parametrize('path1', [file1_json, file1_yaml])
 @pytest.mark.parametrize('path2', [file2_json, file2_yaml])
-@pytest.mark.parametrize('format', ['json','plain', 'stylish'])
+@pytest.mark.parametrize('format', ['json', 'plain', 'stylish'])
 def test_generate_diff(path1, path2, format):
     with open(TEMP, 'w') as temp_file:
         gd = generate_diff(path1, path2, format)
