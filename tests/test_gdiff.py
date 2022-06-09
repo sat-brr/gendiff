@@ -19,7 +19,7 @@ file1_yaml, file2_yaml = (os.path.join(PATH, 'file5.yaml'),
 
 @pytest.mark.parametrize('path1', [file1_json, file1_yaml])
 @pytest.mark.parametrize('path2', [file2_json, file2_yaml])
-@pytest.mark.parametrize('format', ['json', 'plain', 'stylish'])
+@pytest.mark.parametrize('format', ['json','plain', 'stylish'])
 def test_generate_diff(path1, path2, format):
     with open(TEMP, 'w') as temp_file:
         gd = generate_diff(path1, path2, format)
@@ -38,9 +38,3 @@ def test_generate_diff(path1, path2, format):
         with open(RESULT_JSON) as file:
             result_json = file.read()
         assert res == result_json
-
-
-with open(RESULT_STYLISH) as file:
-    a = file.read()
-    b = a
-    c = b
