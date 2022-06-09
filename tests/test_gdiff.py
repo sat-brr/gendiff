@@ -1,3 +1,4 @@
+from re import A
 import pytest
 import os
 from gendiff.generate_diff import generate_diff
@@ -37,3 +38,9 @@ def test_generate_diff(path1, path2, format):
         with open(RESULT_JSON) as file:
             result_json = file.read()
         assert res == result_json
+
+
+with open(RESULT_STYLISH) as file:
+    a = file.read()
+    b = a
+    c = b
