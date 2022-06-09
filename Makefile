@@ -9,4 +9,4 @@ package-uninstall: # удаление пакета
 lint:
 	poetry run flake8 gendiff
 tcov:
-	poetry run pytest --cov=gen_diff --cov-report xml tests/
+	poetry run pytest --cov=gendiff --cov-report xml tests/
