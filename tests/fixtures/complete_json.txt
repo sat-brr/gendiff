@@ -1,110 +1,100 @@
-[
-    {
-        "name": "common",
-        "status": "nested",
-        "nested": [
-            {
-                "name": "follow",
-                "status": "added",
-                "value": "false"
-            },
-            {
-                "name": "setting1",
-                "status": "common",
-                "value": "Value 1"
-            },
-            {
-                "name": "setting2",
-                "status": "removed",
-                "value": "200"
-            },
-            {
-                "name": "setting3",
-                "status": "updated",
-                "old_value": "true",
-                "new_value": "null"
-            },
-            {
-                "name": "setting4",
-                "status": "added",
-                "value": "blah blah"
-            },
-            {
-                "name": "setting5",
-                "status": "added",
-                "value": {
+{
+    "common": [
+        "nested",
+        {
+            "follow": [
+                "added",
+                false
+            ],
+            "setting1": [
+                "unchanged",
+                "Value 1"
+            ],
+            "setting2": [
+                "removed",
+                200
+            ],
+            "setting3": [
+                "updated",
+                [
+                    true,
+                    null
+                ]
+            ],
+            "setting4": [
+                "added",
+                "blah blah"
+            ],
+            "setting5": [
+                "added",
+                {
                     "key5": "value5"
                 }
-            },
-            {
-                "name": "setting6",
-                "status": "nested",
-                "nested": [
-                    {
-                        "name": "doge",
-                        "status": "nested",
-                        "nested": [
-                            {
-                                "name": "wow",
-                                "status": "updated",
-                                "old_value": "",
-                                "new_value": "so much"
-                            }
-                        ]
-                    },
-                    {
-                        "name": "key",
-                        "status": "common",
-                        "value": "value"
-                    },
-                    {
-                        "name": "ops",
-                        "status": "added",
-                        "value": "vops"
-                    }
+            ],
+            "setting6": [
+                "nested",
+                {
+                    "doge": [
+                        "nested",
+                        {
+                            "wow": [
+                                "updated",
+                                [
+                                    "",
+                                    "so much"
+                                ]
+                            ]
+                        }
+                    ],
+                    "key": [
+                        "unchanged",
+                        "value"
+                    ],
+                    "ops": [
+                        "added",
+                        "vops"
+                    ]
+                }
+            ]
+        }
+    ],
+    "group1": [
+        "nested",
+        {
+            "baz": [
+                "updated",
+                [
+                    "bas",
+                    "bars"
                 ]
-            }
-        ]
-    },
-    {
-        "name": "group1",
-        "status": "nested",
-        "nested": [
-            {
-                "name": "baz",
-                "status": "updated",
-                "old_value": "bas",
-                "new_value": "bars"
-            },
-            {
-                "name": "foo",
-                "status": "common",
-                "value": "bar"
-            },
-            {
-                "name": "nest",
-                "status": "updated",
-                "old_value": {
-                    "key": "value"
-                },
-                "new_value": "str"
-            }
-        ]
-    },
-    {
-        "name": "group2",
-        "status": "removed",
-        "value": {
+            ],
+            "foo": [
+                "unchanged",
+                "bar"
+            ],
+            "nest": [
+                "updated",
+                [
+                    {
+                        "key": "value"
+                    },
+                    "str"
+                ]
+            ]
+        }
+    ],
+    "group2": [
+        "removed",
+        {
             "abc": 12345,
             "deep": {
                 "id": 45
             }
         }
-    },
-    {
-        "name": "group3",
-        "status": "added",
-        "value": {
+    ],
+    "group3": [
+        "added",
+        {
             "deep": {
                 "id": {
                     "number": 45
@@ -112,5 +102,5 @@
             },
             "fee": 100500
         }
-    }
-]
+    ]
+}

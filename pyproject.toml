@@ -3,7 +3,7 @@ name = "hexlet-code"
 version = "1.0.0"
 description = ""
 authors = ["vlad moryakov <sat1sfy@vk.com>"]
-packages = [{include = "gen_diff"}]
+packages = [{include = "gendiff"}]
 
 [tool.poetry.dependencies]
 python = "^3.8"
@@ -16,7 +16,7 @@ flake8 = "^4.0.1"
 PyYAML = "^6.0"
 
 [tool.poetry.scripts]
-gendiff = "gen_diff.scripts.gendiff:main"
+gendiff = "gendiff.scripts.gen_diff:main"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
