@@ -7,7 +7,7 @@ FIXTURE_PATH = f'{TEST_PATH}/fixtures'
 RESULT_STYLISH = f'{FIXTURE_PATH}/complete_stylish.txt'
 RESULT_PLAIN = f'{FIXTURE_PATH}/complete_plain.txt'
 RESULT_JSON = f'{FIXTURE_PATH}/complete_json.txt'
-TEMP_FIXTURE = f'{FIXTURE_PATH}/temp.txt'
+TEMP_FIXTURE = '/home/sat/python-project-lvl2/tests/fixtures/temp.txt'
 
 
 @pytest.mark.parametrize('file1, file2, path, format',
