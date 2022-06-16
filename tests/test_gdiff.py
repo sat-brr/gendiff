@@ -1,29 +1,26 @@
 import pytest
 import os
-from gendiff.generate_diff import generate_diff
+from gendiff.diff_generator import generate_diff
+
+TEST_PATH = os.path.dirname('/home/sat/python-project-lvl2/tests/test_gdiff.py')
+FIXTURE_PATH = f'{TEST_PATH}/fixtures'
+RESULT_STYLISH = f'{FIXTURE_PATH}/complete_stylish.txt'
+RESULT_PLAIN = f'{FIXTURE_PATH}/complete_plain.txt'
+RESULT_JSON = f'{FIXTURE_PATH}/complete_json.txt'
+TEMP_FIXTURE = f'{FIXTURE_PATH}/temp.txt'
 
 
-PATH = './tests/fixtures/'
-RESULT_STYLISH = os.path.join(PATH, 'complete_stylish.txt')
-RESULT_PLAIN = os.path.join(PATH, 'complete_plain.txt')
-RESULT_JSON = os.path.join(PATH, 'complete_json.txt')
-TEMP = os.path.join(PATH, 'temp.txt')
-
-
-file1_json, file2_json = (os.path.join(PATH, 'file5.json'),
-                          os.path.join(PATH, 'file6.json'))
-file1_yaml, file2_yaml = (os.path.join(PATH, 'file5.yaml'),
-                          os.path.join(PATH, 'file6.yaml'))
-
-
-@pytest.mark.parametrize('path1', [file1_json, file1_yaml])
-@pytest.mark.parametrize('path2', [file2_json, file2_yaml])
-@pytest.mark.parametrize('format', ['json', 'plain', 'stylish'])
-def test_generate_diff(path1, path2, format):
-    with open(TEMP, 'w') as temp_file:
-        gd = generate_diff(path1, path2, format)
+@pytest.mark.parametrize('file1, file2, path, format',
+                         [('file5.json', 'file6.json', FIXTURE_PATH, 'stylish'),
+                          ('file5.yaml', 'file6.yaml', FIXTURE_PATH, 'plain'),
+                          ('file5.json', 'file6.yaml', FIXTURE_PATH, 'json')])
+def test_generate_diff(file1, file2, path, format):
+    path_file1 = f'{path}/{file1}'
+    path_file2 = f'{path}/{file2}'
+    with open(TEMP_FIXTURE, 'w') as temp_file:
+        gd = generate_diff(path_file1, path_file2, format)
         temp_file.write(gd)
-    load_temp = open(TEMP, 'r')
+    load_temp = open(TEMP_FIXTURE, 'r')
     res = load_temp.read()
     if format == 'stylish':
         with open(RESULT_STYLISH) as file:
