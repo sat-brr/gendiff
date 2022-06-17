@@ -1,5 +1,4 @@
 import pytest
-import os
 from gendiff.diff_generator import generate_diff
 
 TEST_PATH = './tests'
