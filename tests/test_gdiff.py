@@ -2,7 +2,7 @@ import pytest
 import os
 from gendiff.diff_generator import generate_diff
 
-TEST_PATH = os.path.dirname('/home/sat/python-project-lvl2/tests/test_gdiff.py')
+TEST_PATH = './tests'
 FIXTURE_PATH = f'{TEST_PATH}/fixtures'
 RESULT_STYLISH = f'{FIXTURE_PATH}/complete_stylish.txt'
 RESULT_PLAIN = f'{FIXTURE_PATH}/complete_plain.txt'
