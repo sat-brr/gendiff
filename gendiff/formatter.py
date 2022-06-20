@@ -3,10 +3,12 @@ from gendiff.formatters.plain import to_plain
 from gendiff.formatters.json import to_json
 
 
-def rendering(diff, format):
+def format_diff(diff, format):
     if format == 'stylish':
         return to_stylish(diff)
     elif format == 'plain':
         return to_plain(diff)
     elif format == 'json':
         return to_json(diff)
+    else:
+        return 'Unknown format.'

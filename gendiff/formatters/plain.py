@@ -10,16 +10,14 @@ def format_value(value):
 
 
 def build_update(old, new):
-    result = ''
     if isinstance(old, dict) and type(new) != dict:
-        result += f". From [complex value] to {format_value(new)}\n"
-    elif isinstance(new, dict) and type(old) != dict:
-        result += f". From {format_value(old)} to [complex value]\n"
-    elif isinstance(old, dict) and isinstance(new, dict):
-        result += ". From [complex value] to [complex value]\n"
-    elif not isinstance(old, dict) and not isinstance(new, dict):
-        result += f". From {format_value(old)} to {format_value(new)}\n"
-    return result
+        return f". From [complex value] to {format_value(new)}\n"
+    if isinstance(new, dict) and type(old) != dict:
+        return f". From {format_value(old)} to [complex value]\n"
+    if isinstance(old, dict) and isinstance(new, dict):
+        return ". From [complex value] to [complex value]\n"
+    if not isinstance(old, dict) and not isinstance(new, dict):
+        return f". From {format_value(old)} to {format_value(new)}\n"
 
 
 def build_by_status(status, key, value, level):
@@ -39,19 +37,19 @@ def build_by_status(status, key, value, level):
     return result
 
 
-def build_str(source, level=''):
+def walk_on_diff(diff, level=''):
     result = ''
-    for key, item in tuple(sorted(source.items())):
+    for key, item in tuple(sorted(diff.items())):
         status = item[0]
         values = item[1:]
         value = values[0]
         if status == 'nested':
-            result += build_str(value, level=level + key + '.')
+            result += walk_on_diff(value, level=level + key + '.')
         else:
             result += build_by_status(status, key, value, level)
     return result
 
 
-def to_plain(source):
-    result = build_str(source)
+def to_plain(diff):
+    result = walk_on_diff(diff)
     return result.rstrip()
