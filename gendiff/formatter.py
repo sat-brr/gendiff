@@ -6,9 +6,9 @@ from gendiff.formatters.json import to_json
 def format_diff(diff, format):
     if format == 'stylish':
         return to_stylish(diff)
-    elif format == 'plain':
+    if format == 'plain':
         return to_plain(diff)
-    elif format == 'json':
+    if format == 'json':
         return to_json(diff)
     else:
-        return 'Unknown format.'
+        raise Exception('Incorrect formatting style!')

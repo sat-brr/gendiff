@@ -1,4 +1,4 @@
-from gendiff.file_loader import load_file
+from gendiff.file_parser import get_data_from_file
 from gendiff.formatter import format_diff
 
 
@@ -29,7 +29,7 @@ def build_diff(data1, data2):
 
 
 def generate_diff(path1, path2, format='stylish'):
-    data1 = load_file(path1)
-    data2 = load_file(path2)
+    data1 = get_data_from_file(path1)
+    data2 = get_data_from_file(path2)
     diff = build_diff(data1, data2)
     return format_diff(diff, format)

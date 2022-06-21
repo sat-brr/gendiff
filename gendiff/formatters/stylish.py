@@ -1,52 +1,53 @@
+ONE_LEVEL_INDENT = '    '
+
+
 def to_str(value, indent):
-    result = ''
-    indent += '    '
+    if isinstance(value, int):
+        return str(value).lower()
+    if value is None:
+        return 'null'
     if isinstance(value, dict):
+        indent += ONE_LEVEL_INDENT
         result = '{\n'
         for k, v in value.items():
-            result += f'{indent}  {k}: {to_str(v, indent)}\n'
-        result += f'{indent[:-2]}}}'
-    elif isinstance(value, int):
-        return str(value).lower()
-    elif value is None:
-        return 'null'
+            result += f'{indent}    {k}: {to_str(v, indent)}\n'
+        result += f'{indent}}}'
+        return result
     else:
         return value
-    return result
 
 
-def build_by_status(status, key, value, indent):
+def build_line_by_status(status, key, value, indent):
     if status == 'unchanged':
-        return f'{indent}  {key}: {to_str(value, indent)}\n'
+        return f'{indent}    {key}: {to_str(value, indent)}\n'
     if status == 'added':
-        return f'{indent}+ {key}: {to_str(value, indent)}\n'
+        return f'{indent}  + {key}: {to_str(value, indent)}\n'
     if status == 'removed':
-        return f'{indent}- {key}: {to_str(value, indent)}\n'
+        return f'{indent}  - {key}: {to_str(value, indent)}\n'
     if status == 'updated':
         result = ''
-        old, new = value[0], value[1]
-        result += f'{indent}- {key}: {to_str(old, indent)}\n'
-        result += f'{indent}+ {key}: {to_str(new, indent)}\n'
+        old, new = value
+        result += f'{indent}  - {key}: {to_str(old, indent)}\n'
+        result += f'{indent}  + {key}: {to_str(new, indent)}\n'
         return result
+    else:
+        raise Exception('Invalid status!')
 
 
-def walk_on_diff(diff, level=0):
-    level_indent = '    ' * level
-    indent = '  ' + level_indent
+def walk(diff, level=0):
+    indent_level = ONE_LEVEL_INDENT * level
     result = '{\n'
     for key, item in tuple(sorted(diff.items())):
-        status = item[0]
-        values = item[1:]
-        value = values[0]
+        status, value = item
         if status == 'nested':
-            result += f'{indent}  {key}: '
-            result += walk_on_diff(value, level + 1)
+            result += f'{indent_level}    {key}: '
+            result += walk(value, level + 1)
         else:
-            result += build_by_status(status, key, value, indent)
-    result += f'{indent[:-2]}}}\n'
+            result += build_line_by_status(status, key, value, indent_level)
+    result += f'{indent_level}}}\n'
     return result
 
 
 def to_stylish(diff):
-    result = walk_on_diff(diff)
+    result = walk(diff)
     return result.rstrip()
