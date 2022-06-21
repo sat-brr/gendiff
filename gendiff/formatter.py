@@ -10,5 +10,4 @@ def format_diff(diff, format):
         return to_plain(diff)
     if format == 'json':
         return to_json(diff)
-    else:
-        raise Exception('Incorrect formatting style!')
+    raise Exception('Incorrect formatting style!')

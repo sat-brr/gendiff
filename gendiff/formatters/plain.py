@@ -7,8 +7,7 @@ def to_str(value):
         return value
     if isinstance(value, dict):
         return '[complex value]'
-    else:
-        return f"'{value}'"
+    return f"'{value}'"
 
 
 def build_line_by_status(status, key, value, path):
@@ -26,8 +25,7 @@ def build_line_by_status(status, key, value, path):
         old, new = value
         result += f". From {to_str(old)} to {to_str(new)}\n"
         return result
-    else:
-        raise Exception('Invalid status!')
+    raise Exception('Invalid status!')
 
 
 def walk(diff, path=''):

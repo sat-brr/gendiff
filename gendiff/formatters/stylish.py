@@ -1,4 +1,4 @@
-ONE_LEVEL_INDENT = '    '
+TAB = '    '
 
 
 def to_str(value, indent):
@@ -7,14 +7,13 @@ def to_str(value, indent):
     if value is None:
         return 'null'
     if isinstance(value, dict):
-        indent += ONE_LEVEL_INDENT
+        indent += TAB
         result = '{\n'
         for k, v in value.items():
             result += f'{indent}    {k}: {to_str(v, indent)}\n'
         result += f'{indent}}}'
         return result
-    else:
-        return value
+    return value
 
 
 def build_line_by_status(status, key, value, indent):
@@ -30,12 +29,11 @@ def build_line_by_status(status, key, value, indent):
         result += f'{indent}  - {key}: {to_str(old, indent)}\n'
         result += f'{indent}  + {key}: {to_str(new, indent)}\n'
         return result
-    else:
-        raise Exception('Invalid status!')
+    raise Exception('Invalid status!')
 
 
 def walk(diff, level=0):
-    indent_level = ONE_LEVEL_INDENT * level
+    indent_level = TAB * level
     result = '{\n'
     for key, item in tuple(sorted(diff.items())):
         status, value = item
